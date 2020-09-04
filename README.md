@@ -33,19 +33,18 @@ All the below files won't appear until the code is executed
     * Mode 3, RUNTIMER: Will return the runtime of CreateMaze.py along with any of the solving algorithms used
     * Default Mode is: SOLVERS (ON), INSTRUCTIONS (ON), RUNTIMER(OFF)
 
-## Running Instructions (Ubuntu)🏃‍♀️
+## Running Instructions 🏃‍♀️
 
-1. Extract all the files from the tar.gz folder, ensure that all the files are in the same directory
-2. Before running the code, download the Pillow module for python by executing `sudo apt-get install python3-dev python3-setuptools` in the terminal window
+1. Clone the repository onto your machine
+2. Install the PILLOW module
 3. In the terminal, Navigate to the directory with all the files
-4. Execute 'python3 CreateMaze.py'
+4. Execute `python3 CreateMaze.py`
 5. Follow the given input intructions when the program is run
 6. If Solvers is ON, select which algorithms you would like to solve the maze with
 7. When you have finished executing the program there will be a series of '.png' files in the same directiory, see the 'Other Included Files' if clarification is needed
 
 ## Assumptions
 
-* Linux has a pixel limit of 89478485. So (input1 + 4)*(input2 + 4)*zoom^2 must be less than 89478485. The '+4' is to account for the extra pixels used to create the border walls on the maze
 * Inputs for  maze size will be be positive odd integers, where at least one is greater than 1
 * Inputs for zoom are positive integers
 
