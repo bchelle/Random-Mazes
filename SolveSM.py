@@ -9,22 +9,22 @@ def SetupSM():
     width, height = maze.size
     PIX = maze.load()
 
-     #Finds the size of each 'block', as well as the the maze dimensions in block, not pixels
+    # Finds the size of each 'block', as well as the the maze dimensions in block, not pixels
     BLOCKSIZE = FindBlockSize(width, height)
     BLOCKDIMS = [int (width/ BLOCKSIZE), int (height/ BLOCKSIZE)]
 
-    #Finds Location of start and finish, as well as nodes
+    # Finds Location of start and finish, as well as nodes
     nodes = FindNodes()
     start = FindStart()
     finish = FindFinish()
 
-    #Travels maze as a 'smart mouse'
+    # Travels maze as a 'smart mouse'
     TravelMazeSM(nodes, start, finish)
 
-    #Draws the start and finish back in
+    # Draws the start and finish back in
     DrawColor(start[0]*BLOCKSIZE, start[1]*BLOCKSIZE, (255, 0, 0))
     DrawColor(finish[0]*BLOCKSIZE, finish[1]*BLOCKSIZE, (0, 255, 0))
-    
+
     maze.save('SolvedSM.png')
 
 """Opens the image file containing the maze"""
@@ -34,14 +34,14 @@ def OpenMaze():
 
 """Finds all the nodes in the maze"""
 def FindNodes():
-    """Nodes is a dicitonary storing coordinates as the key and 
-    directions from that node as the value"""
+    # Nodes is a dicitonary storing coordinates as the key and
+    # directions from that node as the value
     nodes = {}
     for x in range(2, BLOCKDIMS[0] - 2, 2):
         for y in range(2, BLOCKDIMS[1] - 2, 2):
             allDirections = FindDirections(x, y)
 
-            #Conditions for a block to be a 'node'
+            # Conditions for a block to be a 'node'
             if len(allDirections) >= 3 or allDirections == 'LU'\
             or allDirections == 'LD'\
             or allDirections == 'RU' or allDirections == 'RD'\
@@ -61,7 +61,7 @@ def FindBlockSize(width, height):
 def FindStart():
     for x in range(2, BLOCKDIMS[0] - 2, 2):
         for y in range(2, BLOCKDIMS[1] - 2, 2):
-            #If the pixel read is red that marks the start
+            # If the pixel read is red that marks the start
             if ColorCheck(x*BLOCKSIZE, y*BLOCKSIZE, (255, 0, 0)):
                 return (x, y)
 
@@ -69,7 +69,7 @@ def FindStart():
 def FindFinish():
     for x in range(2, BLOCKDIMS[0] - 2, 2):
         for y in range(2, BLOCKDIMS[1] - 2, 2):
-            #If the pixel read is green that marks the finish
+            # If the pixel read is green that marks the finish
             if ColorCheck(x*BLOCKSIZE, y*BLOCKSIZE, (0, 255, 0)):
                 return (x, y)
 
@@ -77,29 +77,29 @@ def FindFinish():
 
 """Applies the 'smart mouse' algorithm"""
 def TravelMazeSM(nodes, start, finish):
-    #Note: DOT is short for Direction of Travel
+    # Note: DOT is short for Direction of Travel
 
-    #Assigns point to start and appends it to our path
+    # Assigns point to start and appends it to our path
     point = start
     DOT = nodes[point]
     path = [start]
 
-    #End process when we have reached the end
+    # End process when we have reached the end
     while point != finish:
-        #Find the next node according to travel to
+        # Find the next node according to travel to
         nextNode = FindNextNode(point[0], point[1], DOT, nodes)
-        #Delete the direction we departed the point from
+        # Delete the direction we departed the point from
         nodes[point] = nodes[point].replace(DOT, '')
-        #Reassign point to the next node
+        # Reassign point to the next node
         point = nextNode
-        #Delete the direction we came from 
+        # Delete the direction we came from
         nodes[point] = nodes[point].replace(OppositeDirection(DOT), '')
         allDirections = nodes[point]
         if len(allDirections) > 0:
             DOT = allDirections[randint(0, len(allDirections)- 1)]
         path.append(point)
 
-        #If we've reached a dead end, backtrack until we're not at one
+        # If we've reached a dead end, backtrack until we're not at one
         while len(allDirections) == 0 and point != finish:
             deadEnd = point
             if len(path) > 0:
@@ -123,7 +123,7 @@ def OppositeDirection(DOT):
 
 """Finds the next node we fill the dead end into"""
 def FindNextNode(x, y, DOT, nodes):
-    #Jumps by 2 blocks in the direction of travel
+    # Jumps by 2 blocks in the direction of travel
     if DOT == 'L':
         xJump = -2
         yJump = 0
@@ -139,14 +139,14 @@ def FindNextNode(x, y, DOT, nodes):
 
     x += xJump
     y += yJump
-    
-    #Keep jumping until we have reached a recognized node 
+
+    # Keep jumping until we have reached a recognized node
     while True:
         if (x, y) in nodes:
             return (x, y)
         else:
             x += xJump
-            y += yJump 
+            y += yJump
 
 """Draws the path according to the given direcitons"""
 def DrawPath(path):
@@ -174,10 +174,10 @@ def DrawPath(path):
 
 """Finds all the directions you can go from any coordinate"""
 def FindDirections(x, y):
-    #It should be noted that 'U' is up, 'D' is down, 'R' is right...
+    # It should be noted that 'U' is up, 'D' is down, 'R' is right...
     directions = ''
 
-    #Checks all adjacent blocks, if theyre white... Add the direction
+    # Checks all adjacent blocks, if theyre white... Add the direction
     if ColorCheck((x + 1)*BLOCKSIZE, y*BLOCKSIZE, (255, 255, 255)):
         directions += 'R'
     if ColorCheck((x - 1)*BLOCKSIZE, y*BLOCKSIZE, (255, 255, 255)):
@@ -202,4 +202,3 @@ def DrawColor(startX, startY, color):
     for x in range(startX, startX + BLOCKSIZE):
         for y in range(startY, startY + BLOCKSIZE):
             PIX[x,y] = color
-    
