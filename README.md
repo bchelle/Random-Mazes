@@ -47,6 +47,5 @@ All the below files won't appear until the code is executed
 
 * Inputs for  maze size will be be positive odd integers, where at least one is greater than 1
 * Inputs for zoom are positive integers
-
 * To solve with the Left Hand Rule the Zoom must be divisible by 3
 * To solve with the Random Mouse the maze has to be of a relatively small size due to the inefficiency of the algorithm
