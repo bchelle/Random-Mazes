@@ -26,12 +26,12 @@ All the below files won't appear until the code is executed
 
 ### Notes 📝
 
-1. A self-created simulation of all these algorithms is availble at https://www.youtube.com/watch?v=gktYREKxwkw
-2. CreateMaze.py Has 3 Adjustable modes within the code.
+1. A self-created simulation of all these algorithms is availble at https://www.youtube.com/watch?v=ifyov6MqhRY
+2. I also highly recommend looking in the 'examples' directory to look at some insanely large mazes which were both created and solved using this project
+3. CreateMaze.py Has 3 Adjustable modes within the code.
     * Mode 1, SOLVERS: When on (1) will ask if you want them to be solved using the algorithms
     * Mode 2, INSTRUCTIONS: Gives in depth instuctions on allowable user inputs
     * Mode 3, RUNTIMER: Will return the runtime of CreateMaze.py along with any of the solving algorithms used
-    * Default Mode is: SOLVERS (ON), INSTRUCTIONS (ON), RUNTIMER(OFF)
 
 ## Running Instructions 🏃‍♀️
 
